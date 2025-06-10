@@ -1,0 +1,81 @@
+get: 
+  tags: 
+    - 記事
+  summary: 記事の一覧を返却します
+  operationId: getPosts
+  parameters:
+    - name: q
+      in: query
+      description: |
+        * 記事を絞り込むための条件を指定します
+        * [#104: help/記事の検索方法](https://docs.esa.io/posts/104)を参照
+      schema:
+        type: string
+    - name: include
+      in: query
+      description: |
+        * `comments`を指定するとコメントの配列を含んだレスポンスを返します。
+        * `comments,comments.stargazers`を指定するとコメントとコメントに対するStarの配列を含んだレスポンスを返します。
+        * `stargazers`を指定するとStarの配列を含んだレスポンスを返します。
+        * `stargazers,comments`のように`,`で区切ることで複数指定できます
+      schema: 
+      type: array
+      items:
+        type: string
+      style: form
+    - name: sort
+      in: query
+      schema: 
+        type: string
+        default: updated
+        enum:
+          - updated
+          - created
+          - number
+          - stars
+          - watches
+          - comments
+          - best_match
+      description: |
+        * `updated` - 記事の更新日時
+        * `created` - 記事の作成日時
+        * `number` - 記事番号
+        * `stars` - 記事へのStarの数
+        * `watches` - 記事へのWatchの数
+        * `comments` - 記事へのCommentの数
+        * `best_match` - 総合的な記事のスコア
+    - name: order
+      in: query
+      schema: 
+        type: string
+        default: desc
+        enum:
+          - asc
+          - desc
+      description: |
+        * `asc` - 昇順
+        * `desc` - 降順
+  responses: 
+    200:
+      description: 成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              posts:
+                type: array
+                items:
+                  $ref: ../components/schemas/Post.yaml
+              prev_page:
+                $ref: ../components/schemas/PrevPage.yaml
+              next_page:
+                $ref: ../components/schemas/NextPage.yaml
+              total_count:
+                $ref: ../components/schemas/TotalCount.yaml
+              page:
+                $ref: ../components/schemas/Page.yaml
+              per_page:
+                $ref: ../components/schemas/PerPage.yaml
+              max_per_page:
+                $ref: ../components/schemas/MaxPerPage.yaml

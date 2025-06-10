@@ -1,0 +1,2 @@
+type: integer
+description: 1ページあたりに含まれる要素数

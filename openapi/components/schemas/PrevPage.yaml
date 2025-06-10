@@ -1,0 +1,4 @@
+type:
+  - integer
+  - 'null'
+description: 1つ前のpage番号。存在しない場合はnull

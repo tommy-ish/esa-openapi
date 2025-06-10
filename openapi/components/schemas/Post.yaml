@@ -1,0 +1,98 @@
+type: object
+properties:
+  number:
+    type: integer
+    description: チーム内で記事を特定するためのIDです
+    example: 123
+  name:
+    type: string
+    description: 記事名です。タグやカテゴリー部分は含みません。
+    example: hi!
+  tags:
+    type: array
+    itmes:
+      type: string
+    description: 記事に紐付けられたタグです。
+    example: ['api', 'dev']
+  category:
+    type:
+      - string
+      - 'null'
+    description: |
+      * 記事が属するカテゴリーです。
+      * 設定されていない場合は`null`になります
+    example: 日報/2015/05/09
+  full_name:
+    type: string
+    description: カテゴリとタグを含む、記事名です。
+    example: '日報/2015/05/09/hi! #api #dev'
+  wip:
+    type: boolean
+    description: 記事がWIP（Work In Progress)状態かどうかを表します。
+    example: true
+  body_md:
+    type: string
+    description: Markdownで書かれた記事の本文です
+    example: '# Getting Started'
+  body_html:
+    type: string
+    description: HTMLに変換された記事の本文です。
+    example: '<h1>Getting Started</h1>'
+  created_at:
+    type: string
+    format: date-time
+    description: 記事が作成された日時です
+    example: 2014-05-10T12:08:55+09:00
+  updated_at:
+    type: string
+    format: date-time
+    description: 記事が更新された日時です
+    example: 2014-05-11T19:21:00+09:00
+  message:
+    type: string
+    description: 記事更新時の変更メモです。
+    example: Add Getting Started section
+  revision_number:
+    type: integer
+    description: 記事のリビジョン番号です。
+    example: 47
+  created_by:
+    description: 記事を作成したユーザを表します。
+    $ref: '#/components/schemas/User'
+  updated_by:
+    description: 記事を最後に更新したユーザを表します。フィールドは`created_by`と共通です。
+  kind:
+    type: string
+    enum:
+      - stock
+      - flow
+    description: 記事の種別を表します
+  comments_count:
+    type: integer
+    description: 記事へのコメント数を表します
+    example: 1
+  tasks_count:
+    type: integer
+    description: 記事中のタスクの総数を表します
+    example: 1
+  done_tasks_count:
+    type: integer
+    description: 記事中の完了済みのタスクの総数を表します
+    example: 1
+  stargazers_count:
+    type: integer
+    description: 記事にStarをしている人数を表します
+    example: 1
+  watchers_count:
+    type: integer
+    description: 記事をWatchしている人数を表します
+    example: 1
+  star:
+    type: boolean
+    description: ユーザーが記事をStarしているかどうかを表します
+    example: true
+  watch:
+    type: boolean
+    description: ユーザーが記事をWatchしているかどうかを表します
+    example: true
+  
